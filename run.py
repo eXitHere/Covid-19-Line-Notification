@@ -20,12 +20,13 @@ def main():
     while(True):
         try :
             response = getDataFromWeb()
+            #print(response)
             report = 'Covid-19\nDev : eXit-Guy\nData : https://corona-stats.online\n\n'
-            report += response[0]['country'] + '\n';
-            report += 'confirmed : ' + str(response[0]['confirmed']) + '\n';
-            report += 'recovered : ' + str(response[0]['recovered']) + '\n';
-            report += 'deaths : ' + str(response[0]['deaths']) + '\n';
-            report += 'lastUpdated : ' + str(dateutil.parser.parse(response[0]['lastUpdated']).strftime("%m/%d/%Y, %H:%M:%S %Z")) + '\n';
+            report += response['data'][0]['country'] + '\n';
+            report += 'confirmed : ' + str(response['data'][0]['confirmed']) + '\n';
+            report += 'recovered : ' + str(response['data'][0]['recovered']) + '\n';
+            report += 'deaths : ' + str(response['data'][0]['deaths']) + '\n';
+            #report += 'lastUpdated : ' + str(dateutil.parser.parse(response['data'][0]['lastUpdated']).strftime("%m/%d/%Y, %H:%M:%S %Z")) + '\n';
             print(report)
             r = requests.post(line_url, headers=line_headers , data = {'message':report})
             print(r.text)
